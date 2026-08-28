@@ -10,15 +10,27 @@ extract_result(res)
 \item{res}{The response object returned by the \code{post_request()}.}
 }
 \value{
-A character string containing the translated text.
+A character string containing the translated text. An error is
+raised when the API reports a failure. Note that the API answers with
+HTTP 200 even when it fails, and reports the failure in
+\code{resultset$code}, so the status code alone cannot be relied upon.
 }
 \description{
 This function extracts the translated text from the response.
 returned by the \code{post_request()} function.
 }
+\section{Deprecated}{
+
+\code{extract_result()} is a low level building block that was never meant to
+be part of the public interface. It is deprecated as of textrar 0.9.0 and
+will be removed in a future release. Use \code{\link[=textra]{textra()}} instead. If you rely
+on it, please open an issue at
+\url{https://github.com/matutosi/textrar/issues}.
+}
+
 \examples{
 \dontrun{
-res <- post_request(paramas, "Hello world!")
+res <- post_request(params, "Hello world!")
 translated <- extract_result(res)
 }
 
